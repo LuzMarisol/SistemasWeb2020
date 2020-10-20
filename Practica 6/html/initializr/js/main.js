@@ -6,21 +6,34 @@ bLogeo.addEventListener('click', function() { //acción de escucha
   parametros.append('PrtEmail', document.getElementById('email').value);
   parametros.append('PrtPassword', document.getElementById('password').value);
   //alert(parametros)
-  axios.post('http://127.0.0.1:4567/otro', {
-    PrtEmail : document.getElementById('email').value,
-    PrtPassword :document.getElementById('password').value
-  })
-       .then(function (response) {
-           console.log(response)
-           console.log(response.data)
-           console.log(response.status)
-           document.getElementById('titulo').innerHTML = response.data
+
+  axios.get('http://127.0.0.1:4567/queryparms?' + parametros)
+        .then(function (response) {
+         console.log(response)
+         console.log(response.data)
+         console.log(response.statusText)
+         document.getElementById('titulo').innerHTML = response.data
+        })
+          .catch(function (error) {
+               console.log(error)
        })
-       .catch(function(error){
-          console.log(error)
-       })
+
 })
 
+
+  // axios.post('http://127.0.0.1:4567/otro', {
+  //   PrtEmail : document.getElementById('email').value,
+  //   PrtPassword :document.getElementById('password').value
+  // })
+  //      .then(function (response) {
+  //          console.log(response)
+  //          console.log(response.data)
+  //          console.log(response.status)
+  //          document.getElementById('titulo').innerHTML = response.data
+  //      })
+  //      .catch(function(error){
+  //         console.log(error)
+  //      })
 
 
   // axios.get('http://127.0.0.1:4567/hello/' + parametros, parametros)
@@ -32,4 +45,4 @@ bLogeo.addEventListener('click', function() { //acción de escucha
   //      })
   //      .catch(function(error){
   //         console.log(error)
-  //      })
+//)}
