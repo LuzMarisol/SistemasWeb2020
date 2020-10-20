@@ -61,7 +61,7 @@ public class App {
             System.out.println("prm1: " + request.queryParams("PrtEmail"));
             System.out.println("prm2: " + request.queryParams("PrtPassword"));
            
-            System.out.println("prm: " + peticion.body());
+            System.out.println("prm: " + request.body());
             System.out.println("prm: " + request.contentType() );
             return "algo";
         });
