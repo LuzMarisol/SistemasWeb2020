@@ -13,21 +13,18 @@ import com.google.gson.JsonParser;
 public class App {
     
     public static void main( String[] args ){
+        
         options("/*",
         (request, response) -> {
 
-            String accessControlRequestHeaders = request
-                    .headers("Access-Control-Request-Headers");
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
-                response.header("Access-Control-Allow-Headers",
-                        accessControlRequestHeaders);
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
             }
 
-            String accessControlRequestMethod = request
-                    .headers("Access-Control-Request-Method");
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
             if (accessControlRequestMethod != null) {
-                response.header("Access-Control-Allow-Methods",
-                        accessControlRequestMethod);
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
 
             return "OK";
@@ -38,13 +35,34 @@ public class App {
         get("/hello/:name", (request,response) -> {
             return "Hello: " + request.params(":name");
         });
-        post("/otro", (request, response) -> {
+        get("/queryparms", (request, response) ->{
+            return "Hello: " + request.queryParams("PrtEmail");
+        });
+
+        post("/json", (request, response) -> {
             JsonParser parser = new JsonParser();
             JsonElement arbol = parser.parse(request.body());
             JsonObject peticion = arbol.getAsJsonObject();
 
             System.out.println("prm: "+  peticion.get("PrtEmail"));
             System.out.println("prm: "+  peticion.get("PrtPassword"));
+            return "algo";
+        });
+
+        post("/formdata", (request, response) -> {
+            // JsonParser parser = new JsonParser();
+            // JsonElement arbol = parser.parse(request.body());
+            // JsonObject peticion = arbol.getAsJsonObject();
+            /* 
+            *  tener cuidado de usar request.body antes de request.queryParams o viceversa
+            *  debido a que el framework consume el contenido al momento de usarlo
+            */
+            
+            System.out.println("prm1: " + request.queryParams("PrtEmail"));
+            System.out.println("prm2: " + request.queryParams("PrtPassword"));
+           
+            System.out.println("prm: " + peticion.body());
+            System.out.println("prm: " + request.contentType() );
             return "algo";
         });
     } 
