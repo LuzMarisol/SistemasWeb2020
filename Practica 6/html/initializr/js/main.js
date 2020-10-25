@@ -10,16 +10,12 @@ bLogeo.addEventListener('click', function() { //acción de escucha
   axios.get('http://127.0.0.1:4567/queryparms?' + parametros)
         .then(function (response) {
          console.log(response)
-         console.log(response.data)
-         console.log(response.statusText)
          document.getElementById('titulo').innerHTML = response.data
         })
           .catch(function (error) {
                console.log(error)
        })
-
 })
-
 
   // axios.post('http://127.0.0.1:4567/otro', {
   //   PrtEmail : document.getElementById('email').value,

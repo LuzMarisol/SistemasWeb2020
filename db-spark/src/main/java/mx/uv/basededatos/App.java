@@ -16,12 +16,12 @@ public class App
     private static Gson gson = new Gson();
     private static Map<String, Usuarios> usuarios = new HashMap<>();
     public static void main( String[] args ){
-        get("/usuarios",(req,res)-> gson.toJson(usuarios.values() ));
-
+        before((req, res) -> res.type("aplication/json")); 
+        get("/usuarios",(req,res)-> gson.toJson(DAO.dameUsuarios()));
         
         post("/usuarios", (req, res) -> {
             String query = req.body();
-            System.out.println("preticion: "  + query);
+            System.out.println("peticion: "  + query);
             Usuarios u = gson.fromJson(query, Usuarios.class);
             String id = UUID.randomUUID().toString();
             u.setId(id);
