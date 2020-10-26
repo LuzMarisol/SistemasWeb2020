@@ -34,7 +34,7 @@ public class AppDB
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
         
         before((req, res) -> res.type("application/json")); 
-        get("/usuarios ", (req,res)-> gson.toJson(DAO.dameUsuarios()));
+        get("/usuarios",(req,res)-> gson.toJson(DAO.dameUsuarios()));
 
        /* List<Usuarios> users = new ArrayList<>();
         users = DAO.dameUsuarios();
@@ -51,8 +51,8 @@ public class AppDB
         
         post("/usuarios", (req, res) -> {
             String query = req.body();
-            System.out.println("peticion: "  + query);
-            Usuarios u = gson.fromJson(query,  Usuarios.class);
+            System.out.println("peticion: " + query);
+            Usuarios u = gson.fromJson(query, Usuarios.class);
             String id = UUID.randomUUID().toString();
             u.setId(id);
            
